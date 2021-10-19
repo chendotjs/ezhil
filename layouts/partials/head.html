@@ -1,29 +1,132 @@
-<div class="header">
-	<div class="header-image-container">
-		<img class="header-image" src="https://avatars.githubusercontent.com/u/5611297?v=4" alt="chendotjs" title="" >
-	</div>
-	<base href="{{ .Site.BaseURL }}">
-	<h1 class="site-title"><a href="{{ .Site.BaseURL }}">{{ .Site.Title }}</a></h1>
-	<div class="site-description">
-		{{- if isset .Site.Params "subtitle" -}}
-		<h2>{{ .Site.Params.Subtitle | markdownify }}</h2>
-		{{- end -}}
-		<nav class="nav social">
-			<ul class="flat">
-				{{- range $index, $key := .Site.Params.Social -}}
-				<a href="{{ $key.url }}" title="{{ $key.name }}"><i data-feather="{{ $key.icon }}"></i></a>
-				{{- end -}}
-			</ul>
-		</nav>
-	</div>
+<div class="header desktop">
 
-	<nav class="nav">
-		<ul class="flat">
-			{{ range .Site.Menus.main }}
-			<li>
-				<a href="{{ .URL }}">{{ .Name }}</a>
-			</li>
-			{{ end }}
-		</ul>
-	</nav>
+	<div class="row">
+		<div class="header-image-container">
+			<img class="header-image" src="https://avatars.githubusercontent.com/u/5611297?v=4" alt="chendotjs">
+		</div>
+		<div class="fill">
+			<h1 class="site-title"><a href="{{ .Site.BaseURL }}">{{ .Site.Title }}</a></h1>
+			<div class="site-description">
+				{{- if isset .Site.Params "subtitle" -}}
+				<h2>{{ .Site.Params.Subtitle | markdownify }}</h2>
+				{{- end -}}
+			</div>
+
+			<nav class="row pre-nav">
+				<div class="pull-right">
+					<ul class="flat">
+						{{- range $index, $key := .Site.Params.Social -}}
+						<li>
+							<a href="{{ $key.url }}" title="{{ $key.name }}">
+								<a href="{{ $key.url }}" title="{{ $key.name }}"><i data-feather="{{ $key.icon }}"></i></a>
+							</a>
+						</li>
+						{{- end -}}
+					</ul>
+				</div>
+			</nav>
+			<nav class="row nav">
+				<div>
+					<ul class="flat">
+						{{ range .Site.Menus.main }}
+						<li>
+							<a href="{{ .URL }}">{{ .Name }}</a>
+						</li>
+						{{ end }}
+					</ul>
+				</div>
+				<div class="pull-right">
+					<div class="club">
+						<form id="myForm">
+							<input type="text" id="inputSearch" name="q" placeholder="Search..." onfocus="warmUp(this)">
+							<button type="submit" id="buttonSubmitSearch" style="line-height: normal;"><i id="iconSearch" class="fa fa-search"></i></button>
+						</form>
+					</div>
+				</div>
+			</nav>
+		</div>
+	</div>
 </div>
+
+<div class="header mobile">
+
+	<div class="row">
+		<div class="header-image-container">
+			<img class="header-image" src="https://avatars.githubusercontent.com/u/5611297?v=4" alt="chendotjs">
+		</div>
+		<div class="fill">
+			<h1 class="site-title"><a href="{{ .Site.BaseURL }}">{{ .Site.Title }}</a></h1>
+			<div class="site-description">
+				{{- if isset .Site.Params "subtitle" -}}
+				<h2>{{ .Site.Params.Subtitle | markdownify }}</h2>
+				{{- end -}}
+			</div>
+		</div>
+	</div>
+	<div>
+		<div>
+			<nav class="row pre-nav">
+				<div class="pull-right">
+					<ul class="flat">
+						{{- range $index, $key := .Site.Params.Social -}}
+						<li>
+							<a href="{{ $key.url }}" title="{{ $key.name }}">
+								<a href="{{ $key.url }}" title="{{ $key.name }}"><i data-feather="{{ $key.icon }}"></i></a>
+							</a>
+						</li>
+						{{- end -}}
+					</ul>
+				</div>
+			</nav>
+			<nav class="row nav">
+				<div>
+					<ul class="flat">
+						{{ range .Site.Menus.main }}
+						<li>
+							<a href="{{ .URL }}">{{ .Name }}</a>
+						</li>
+						{{ end }}
+					</ul>
+				</div>
+				<div class="pull-right">
+					<div class="club">
+						<form id="myFormMobile">
+							<input type="text" id="inputSearchMobile" name="q" placeholder="Search..." onfocus="warmUp(this)">
+							<button type="submit" id="buttonSubmitSearchMobile" style="line-height: normal;"><i id="iconSearchMobile" class="fa fa-search"></i></button>
+						</form>
+					</div>
+				</div>
+			</nav>
+		</div>
+	</div>
+</div>
+
+<script type="text/javascript">
+	window.addEventListener( "load", function () {
+		const urlParams = new URLSearchParams(window.location.search);
+
+		/*
+		const searchEnabled = urlParams.get('search-enabled');
+		if (searchEnabled == "true") {
+			document.getElementById( "inputSearch" ).hidden = false;
+			document.getElementById( "buttonSubmitSearch" ).hidden = false;
+			document.getElementById( "inputSearchMobile" ).hidden = false;
+			document.getElementById( "buttonSubmitSearchMobile" ).hidden = false;
+		}
+		*/
+
+		const form = document.getElementById( "myForm" );
+
+		form.addEventListener("submit", function (event) {
+			event.preventDefault();
+			sendData(new FormData(form));
+		});
+
+		const formMobile = document.getElementById( "myFormMobile" );
+
+		formMobile.addEventListener("submit", function (event) {
+			event.preventDefault();
+			sendData(new FormData(formMobile));
+		});
+	});
+</script>
